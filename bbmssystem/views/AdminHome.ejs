@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Home</title>
+    <link rel="stylesheet" href="./style/Admin.css">
+</head>
+
+<body>
+
+
+    <%- include("partials/AdminHeader.ejs") %>
+
+            <div class="container">
+            <h1>Blood Inventory</h1>
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Blood Group</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% inventory.forEach(blood=> { %>
+                        <tr>
+                            <td>
+                                <%= blood.bloodgroup %>
+                            </td>
+                            <td>
+                                <%= blood.quantity %>
+                            </td>
+                        </tr>
+                        <% }); %>
+                </tbody>
+            </table>
+
+            <h2>Add Blood</h2>
+            <form action="/addblood" method="POST">
+                <label for="bloodgroup">Blood Group:</label>
+                <input type="text" name="bloodgroup" id="bloodgroup" required>
+                <br>
+                <label for="quantity">Quantity:</label>
+                <input type="number" name="quantity" id="quantity" required>
+                <br>
+                <button type="submit">Add Blood</button>
+            </form>
+
+            <h3>All User Requests</h3>
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>User Name</th>
+                            <th>Blood Group</th>
+                            <th>Quantity</th>
+                            <th>Order Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% userRequest.forEach(request=> { %>
+                            <tr>
+                                <td>
+                                    <%= request.id %>
+                                </td>
+                                <td>
+                                    <%= request.name %>
+                                </td>
+                                <td>
+                                    <%= request.bloodgroup %>
+                                </td>
+                                <td>
+                                    <%= request.quantity %>
+                                </td>
+                                <td>
+                                    <%= request.orderdate %>
+                                </td>
+                                <td>
+                                    <%= request.status %>
+                                </td>
+                                <td>
+                                    <form action="/admin/grant/<%= request.id %>/<%= request.bloodgroup %>"
+                                        method="POST">
+                                        <button type="submit">Grant</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <% }); %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</body>
+
+</html>

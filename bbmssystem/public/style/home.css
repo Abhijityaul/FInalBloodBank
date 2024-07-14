@@ -1,0 +1,122 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.hero-section {
+  z-index: 2;
+  min-height: 100vh;
+  background-image: url('/img/bbm.png');
+  background-size: cover;
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation: slide 2s ease-in-out forwards;
+}
+
+nav {
+
+  display: flex;
+  justify-content: space-between;
+  display: flex;
+  font-size: x-large;
+  align-items: center;
+  height: 10vh;
+  padding: 0rem 1.5rem;
+  transform: translateY(-100%);
+  animation: movedown 850ms ease-in 2s forwards;
+}
+nav > ul {
+  display: flex;
+  gap: 30px;
+}
+ul > li {
+  list-style: none;
+  font-family: ui-rounded;
+  font-size: xx-large;
+  cursor: pointer;
+  color: white;
+ 
+}
+li > a{
+  
+  text-decoration: inherit;
+  color: white;
+
+}
+
+@keyframes slide {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes movedown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0%);
+  }
+}
+.hero-text {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+nav > h2{
+  font-family: ui-rounded;
+  color: white;
+}
+h3 {
+  font-size: xxx-large;
+  font-family: ui-rounded;
+  color: white;
+  color: white;
+}
+button {
+  margin: 30px;
+  padding: 14px;
+  border-radius: 5px;
+  color: white;
+  background: rgb(171 48 171);
+  font-size: x-large;
+  font-family: ui-rounded;
+}
+
+button:hover {
+  background-color: white;
+  color: rgb(171 48 171);
+  
+}
+
+@media (max-width: 600px) {
+  .nav {
+    display: flex;
+    justify-content: space-between;
+  }
+  .hero-text {
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  h3 {
+    font-size: xx-large;
+    font-family: ui-rounded;
+    color: white;
+  }
+  nav>h2{
+    font-size: medium;
+
+  }
+  ul>li{
+    font-size: medium;
+  }
+}

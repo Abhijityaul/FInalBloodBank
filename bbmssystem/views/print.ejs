@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt</title>
+    <link rel="stylesheet" href="./style/print..css">
+    <style>
+        body {
+            background-color: url('/img/bbm.png');
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        h1,
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        p {
+            text-align: center;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        .receipt {
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Receipt</h1>
+    <p><strong>User ID:</strong>
+        <%= request[0].id %>
+    </p>
+    <p><strong>User Name:</strong>
+        <%= request[0].name %>
+    </p>
+    <p><strong>User Aadhar:</strong>
+        <%= request[0].aadhar %>
+    </p>
+    <h2>List Of Blood Achievers</h2>
+    <div class="receipt">
+        <table>
+            <thead>
+                <tr>
+                    <th>Blood Grant To</th>
+                    <th>Blood Group</th>
+                    <th>Quantity</th>
+                    <th>Order Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% request.forEach((req)=> { %>
+                    <tr>
+                        <td>
+                            <%= req.bloodgrantto %>
+                        </td>
+                        <td>
+                            <%= req.bloodgroup %>
+                        </td>
+                        <td>
+                            <%= req.quantity %> Packets
+                        </td>
+                        <td>
+                            <%= req.orderdate %>
+                        </td>
+                        <td>
+                            <%= req.status %>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+    </div>
+    <button onclick="window.print()">Download Receipt</button>
+</body>
+
+</html>

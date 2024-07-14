@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handle Donor's</title>
+    <link rel="stylesheet" href="./style/adminHandleDonor.css">
+</head>
+<body>
+  <%- include("partials/AdminHeader.ejs") %>
+  <div class="padding">
+
+    <div class="container">
+      <p>Add | Edit | Remove</p>
+      
+      <% slotsTime.forEach((item) => { %>
+      <!-- checkbox -->
+      <div class="item">
+        <form action="/delete" method="post">
+          <input type="checkbox" onchange="this.form.submit()" name="deleteItemId" value="<%= item.id %>">
+        </form>
+        
+        <!-- Date  -->
+        <p id="title<%=item.id%>">
+          <%= item.availableslots %>
+        </p>
+        
+        <!-- Complete edit -->
+        <form class="edit" action="/edit" method="post">
+          <input type="hidden" name="updatedItemId" value="<%= item.id %>">
+          <input id="input<%=item.id%>" type="text" name="updatedItemTitle" value="<%= item.availableslots %>" autocomplete="off" autofocus="true" hidden />
+          <button id="done<%=item.id%>" class="edit" type="submit" hidden>
+            <img class="icon" src="/assets/icons/check-solid.svg" alt="tick image">
+          </button>
+        </form>
+        
+        <button id="edit<%=item.id%>" class="edit" onclick="handler('<%=item.id%>')">
+          <img class="icon" src="/assets/icons/pencil-solid.svg" alt="pencil image">
+        </button>
+      </div>
+      <% }) %>
+      
+      <!-- Normal Submit Form Add New -->
+      <form class="item" action="/add" method="post">
+      <input type="time" name="newItem" placeholder="New Item" autocomplete="off" autofocus="true" />
+      <button class="add" type="submit">+</button>
+    </form>
+  </div>
+  
+  <h3>All Donor Appointments</h3>
+  <div class="donortable">
+    <table id="donorTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Blood Group</th>
+          <th>Gender</th>
+          <th>Appointmenttime</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% donordata.forEach((donor) => { %>
+          <tr>
+            <td><%= donor.bloodid %></td>
+            <td><%= donor.name %></td>
+            <td><%= donor.bloodgroup %></td>
+            <td><%= donor.gender %></td>
+            <td><%= donor.appointmenttime  %></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+    
+    <h3>Additional Donor Requests</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Appointment Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% plusdonorreq.forEach((time) => { %>
+        <tr>
+          <td><%= time.id %></td>
+          <td><%= time.appointmenttime %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+  
+  <script>
+    function handler(id) {
+      document.getElementById("title" + id).setAttribute("hidden", true);
+      document.getElementById("edit" + id).setAttribute("hidden", true);
+      document.getElementById("done" + id).removeAttribute("hidden");
+      document.getElementById("input" + id).removeAttribute("hidden");
+    }
+    </script>
+</body>
+</html>
